@@ -46,7 +46,7 @@ html.ready .hero-text{animation:heroIn .8s ease both}
 .wrap{max-width:920px;margin:0 auto;padding:0 1.25rem 1rem}
 section.day{padding:2.4rem 0 0}
 section.day:first-of-type{padding-top:1.8rem}
-.day-head{display:flex;gap:1.1rem;align-items:center;margin-bottom:1rem}
+.day-head{display:flex;gap:1.1rem;align-items:center;margin-bottom:1rem;padding:14px 0 6px}
 /* The day-number ring is 28 separate dots drawn as filled circles inside
    the SVG itself. There is no stroked outline and the button carries no
    border at all, in either colour scheme, so nothing can render as a
@@ -257,7 +257,7 @@ html.ready .daybar{animation:barIn .55s ease both}
 @media (prefers-color-scheme: dark){ .day-pill.active{color:#16151d} }
 .daybar.mini .daybar-row{padding-top:.32rem;padding-bottom:.32rem}
 .daybar.mini .day-pill{padding:.2rem .62rem;font-size:.78rem}
-section.day{scroll-margin-top:92px}
+section.day{scroll-margin-top:112px}
 
 .hero h1::after{content:"";display:block;width:64px;height:3px;border-radius:2px;background:#e0684b;margin-top:.65rem;transform-origin:left center}
 html.js:not(.ready) .hero h1::after{transform:scaleX(0)}
@@ -460,10 +460,6 @@ html.js .travel.in .travel-label{animation:labelPop .5s .3s ease both}
 .trip-start-row .ts-note{color:var(--accent-ink);font-weight:700}
 </style>
 
-<style>
-/* performance: skip rendering off-screen days until they near the viewport */
-section.day{content-visibility:auto;contain-intrinsic-size:auto 1400px}
-</style>
 </head>
 <body>
 <header class="hero">
