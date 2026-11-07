@@ -37,13 +37,13 @@ img{display:block;max-width:100%}
 .hero{position:relative;min-height:min(72vh,620px);display:flex;align-items:flex-end;overflow:hidden;background:#10101a;touch-action:pan-y}
 .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero .shade{position:absolute;inset:0;background:var(--hero-shade)}
-.hero-text{position:relative;width:100%;max-width:920px;margin:0 auto;padding:3.5rem 1.25rem 2rem;color:#f7f2e7}
+.hero-text{position:relative;width:100%;max-width:920px;margin:0 auto;padding:3.5rem 1.75rem 2rem;color:#f7f2e7}
 .hero-ja{margin:0 0 .55rem;font-size:.92rem;font-weight:700;letter-spacing:.38em;color:#f2bda6}
 .hero h1{font-size:clamp(2.2rem,6vw,3.9rem);line-height:1.08;margin:0;font-weight:700}
 @keyframes heroIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 html.js:not(.ready) .hero-text{opacity:0}
 html.ready .hero-text{animation:heroIn .8s ease both}
-.wrap{max-width:920px;margin:0 auto;padding:0 1.25rem 1rem}
+.wrap{max-width:920px;margin:0 auto;padding:0 1.75rem 1rem}
 section.day{padding:2.4rem 0 0}
 section.day:first-of-type{padding-top:1.8rem}
 .day-head{display:flex;gap:1.1rem;align-items:center;margin-bottom:1rem;padding:14px 0 6px}
@@ -117,7 +117,7 @@ html.js .travel.in::before,html.js .travel.in::after{animation:drawLine .9s ease
 html.js .reveal{opacity:0;transform:translateY(18px)}
 html.js .reveal.in{opacity:1;transform:none;transition:opacity .55s ease,transform .55s ease;transition-delay:var(--d,0s)}
 @media (prefers-reduced-motion: reduce){ html.js .reveal{opacity:1;transform:none} }
-footer.credits{max-width:920px;margin:0 auto;padding:2.2rem 1.25rem calc(5rem + env(safe-area-inset-bottom));color:var(--ink-soft);font-size:.85rem}
+footer.credits{max-width:920px;margin:0 auto;padding:2.2rem 1.75rem calc(5rem + env(safe-area-inset-bottom));color:var(--ink-soft);font-size:.85rem}
 .lightbox{position:fixed;inset:0;z-index:50;background:rgba(10,9,16,.94);display:none;flex-direction:column;align-items:center;justify-content:center;padding:1rem;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.35) transparent}
 .lightbox::-webkit-scrollbar{width:8px}
 .lightbox::-webkit-scrollbar-track{background:transparent}
@@ -246,7 +246,7 @@ html.ready .daybar{animation:barIn .55s ease both}
 /* The row spans the FULL width of the bar — no centred max-width — so a
    pill is only ever clipped by the real edge of the screen as the row
    scrolls, never by an invisible container edge partway across it. */
-.daybar-row{width:100%;margin:0;display:flex;gap:.45rem;overflow-x:auto;overflow-y:hidden;padding:.65rem 1.25rem;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;transition:padding .3s ease}
+.daybar-row{width:100%;margin:0;display:flex;gap:.45rem;overflow-x:auto;overflow-y:hidden;padding:.65rem 1.75rem;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;transition:padding .3s ease}
 .daybar-row::-webkit-scrollbar{display:none}
 /* While search is open the row is scroll-locked: the pills stay exactly
    where they were, however the reader interacts with the search field. */
@@ -263,10 +263,10 @@ section.day{scroll-margin-top:112px}
 html.js:not(.ready) .hero h1::after{transform:scaleX(0)}
 html.ready .hero h1::after{animation:lineGrow .9s .45s ease backwards}
 @keyframes lineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-html.js .day-head.reveal:not(.in){transform:translateX(-18px)}
+html.js .day-head.reveal:not(.in){transform:translateY(14px)}
 html.js .day-head.in .day-num b{animation:popIn .55s .08s cubic-bezier(.34,1.56,.64,1) backwards}
 @keyframes popIn{from{transform:scale(.45)}to{transform:scale(1)}}
-button.day-num.live{animation:ringPulse 2.2s ease-out infinite}
+.day-head.in button.day-num.live{animation:ringPulse 2.2s ease-out infinite}
 @keyframes ringPulse{0%{box-shadow:0 0 0 0 rgba(179,64,42,.4)}70%{box-shadow:0 0 0 12px rgba(179,64,42,0)}100%{box-shadow:0 0 0 0 rgba(179,64,42,0)}}
 .route-line span.arrow{display:inline-block;animation:arrowNudge 1.8s ease-in-out infinite}
 .travel-label .t-arrow{display:inline-block;animation:arrowNudge 1.8s ease-in-out infinite}
@@ -298,7 +298,7 @@ html.js .travel.in .travel-label{animation:labelPop .5s .3s ease both}
 .filter-pill.has-filter{background:var(--accent);border-color:var(--accent);color:#fff}
 .filter-pill.has-filter:hover{color:#fff}
 .filter-badge{background:rgba(255,255,255,.28);border-radius:999px;font-size:.72rem;line-height:1;padding:.22rem .42rem}
-.filter-menu{position:absolute;top:calc(100% + 8px);left:1.25rem;width:min(324px,calc(100vw - 1.5rem));background:var(--bg-raise);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:.7rem;z-index:60;text-align:left}
+.filter-menu{position:absolute;top:calc(100% + 8px);left:1.75rem;width:min(324px,calc(100vw - 1.5rem));background:var(--bg-raise);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:.7rem;z-index:60;text-align:left}
 .filter-menu h3{margin:.15rem .35rem .55rem;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
 .filter-opt{appearance:none;font:inherit;width:100%;display:flex;align-items:center;gap:.55rem;background:transparent;border:1px solid transparent;border-radius:10px;padding:.55rem .6rem;cursor:pointer;color:var(--ink);font-size:.95rem;text-align:left}
 .filter-opt:hover{background:color-mix(in srgb,var(--accent) 8%,transparent)}
@@ -455,7 +455,7 @@ html.js .travel.in .travel-label{animation:labelPop .5s .3s ease both}
 .day-pill.today{border-color:var(--accent);color:var(--accent-ink)}
 .day-pill.today::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);margin-left:.45rem;display:inline-block;vertical-align:.14em}
 .today-badge{display:inline-block;margin-left:.6rem;padding:.14rem .55rem;border-radius:999px;background:var(--accent);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;vertical-align:.28em}
-.trip-start-row{max-width:920px;margin:0 auto;padding:0 1.25rem 1.6rem;color:var(--ink-soft);font-size:.85rem;display:flex;align-items:center;gap:.55rem;flex-wrap:wrap}
+.trip-start-row{max-width:920px;margin:0 auto;padding:0 1.75rem 1.6rem;color:var(--ink-soft);font-size:.85rem;display:flex;align-items:center;gap:.55rem;flex-wrap:wrap}
 .trip-start-row input{font:inherit;font-size:.85rem;color:var(--ink);background:var(--bg-raise);border:1px solid var(--line);border-radius:8px;padding:.28rem .5rem}
 .trip-start-row .ts-note{color:var(--accent-ink);font-weight:700}
 </style>
