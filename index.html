@@ -185,6 +185,15 @@ footer.credits{max-width:920px;margin:0 auto;padding:2.2rem 1.75rem calc(5rem + 
    Every effect layer below is inset:0, so the animation spans the ENTIRE
    photo — full width and full height — never just one corner or band. --- */
 .hero-slides{position:absolute;inset:-4% 0;will-change:transform}
+/* Hero drift, driven by the browser's own scrolling engine (a CSS
+   scroll-driven animation) instead of JavaScript, wherever supported:
+   the compositor ties the photo's offset directly to the scroll
+   position, so it cannot move in steps. The range maps the drift to
+   the first 620px of scrolling, matching the old JS parallax rate. */
+@keyframes heroDrift{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,136px,0)}}
+@supports (animation-timeline:scroll()){
+.hero-slides{animation:heroDrift linear both;animation-timeline:scroll(root block);animation-range:0px 620px}
+}
 .hero-slide{position:absolute;inset:0;overflow:hidden;opacity:0;transition:opacity 1.8s ease}
 .hero-slide.is-active{opacity:1}
 .hero-slide img{transform:scale(1.05);-webkit-user-drag:none;user-select:none;-webkit-user-select:none}
@@ -1539,6 +1548,9 @@ html.js .travel.in .travel-label{animation:labelPop .5s .3s ease both}
     var heroImg = document.getElementById("heroSlides");
     var cardImgs = Array.prototype.slice.call(document.querySelectorAll(".card .photo img"));
     var heroCur = 0, pRunning = false, pLastY = -1, pLastT = 0;
+    /* Where CSS scroll-driven animations exist, the stylesheet moves
+       the hero photo and this loop must not touch it at all. */
+    var cssPara = !!(window.CSS && CSS.supports && CSS.supports("animation-timeline: scroll()"));
     function parallaxFrame(t){
       var vh = window.innerHeight;
       var y = window.scrollY;
@@ -1547,7 +1559,7 @@ html.js .travel.in .travel-label{animation:labelPop .5s .3s ease both}
       var target = (y < vh ? y : vh) * 0.22;
       heroCur += (target - heroCur) * (1 - Math.exp(-dt / 90));
       if(Math.abs(target - heroCur) < 0.05) heroCur = target;
-      if(heroImg) heroImg.style.transform = "translate3d(0," + heroCur.toFixed(2) + "px,0)";
+      if(heroImg && !cssPara) heroImg.style.transform = "translate3d(0," + heroCur.toFixed(2) + "px,0)";
       /* Card photos: measure every position first, then write every
          offset, so layout is never re-measured between style writes. */
       var jobs = [];
@@ -1557,7 +1569,7 @@ html.js .travel.in .travel-label{animation:labelPop .5s .3s ease both}
         jobs.push([img, ((r.top + r.height / 2 - vh / 2) / vh) * -7]);
       });
       jobs.forEach(function(j){ j[0].style.translate = "0 " + j[1].toFixed(2) + "px"; });
-      var moving = (y !== pLastY) || heroCur !== target;
+      var moving = (y !== pLastY) || (!cssPara && heroCur !== target);
       pLastY = y;
       if(moving) requestAnimationFrame(parallaxFrame);
       else { pRunning = false; pLastT = 0; }
