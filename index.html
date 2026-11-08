@@ -1547,7 +1547,7 @@ html.js .travel.in .travel-label{animation:labelPop .5s .3s ease both}
   if(!reduceMotion){
     var heroImg = document.getElementById("heroSlides");
     var cardImgs = Array.prototype.slice.call(document.querySelectorAll(".card .photo img"));
-    var heroCur = 0, pRunning = false, pLastY = -1, pLastT = 0;
+    var heroOff = 0, pRunning = false, pLastY = -1, pLastT = 0;
     /* Where CSS scroll-driven animations exist, the stylesheet moves
        the hero photo and this loop must not touch it at all. */
     var cssPara = !!(window.CSS && CSS.supports && CSS.supports("animation-timeline: scroll()"));
@@ -1557,9 +1557,9 @@ html.js .travel.in .travel-label{animation:labelPop .5s .3s ease both}
       var dt = pLastT ? Math.min(t - pLastT, 64) : 16;
       pLastT = t;
       var target = (y < vh ? y : vh) * 0.22;
-      heroCur += (target - heroCur) * (1 - Math.exp(-dt / 90));
-      if(Math.abs(target - heroCur) < 0.05) heroCur = target;
-      if(heroImg && !cssPara) heroImg.style.transform = "translate3d(0," + heroCur.toFixed(2) + "px,0)";
+      heroOff += (target - heroOff) * (1 - Math.exp(-dt / 90));
+      if(Math.abs(target - heroOff) < 0.05) heroOff = target;
+      if(heroImg && !cssPara) heroImg.style.transform = "translate3d(0," + heroOff.toFixed(2) + "px,0)";
       /* Card photos: measure every position first, then write every
          offset, so layout is never re-measured between style writes. */
       var jobs = [];
@@ -1569,7 +1569,7 @@ html.js .travel.in .travel-label{animation:labelPop .5s .3s ease both}
         jobs.push([img, ((r.top + r.height / 2 - vh / 2) / vh) * -7]);
       });
       jobs.forEach(function(j){ j[0].style.translate = "0 " + j[1].toFixed(2) + "px"; });
-      var moving = (y !== pLastY) || (!cssPara && heroCur !== target);
+      var moving = (y !== pLastY) || (!cssPara && heroOff !== target);
       pLastY = y;
       if(moving) requestAnimationFrame(parallaxFrame);
       else { pRunning = false; pLastT = 0; }
